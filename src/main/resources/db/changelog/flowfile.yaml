@@ -1,0 +1,5 @@
+stages:
+  Default:
+    actions:
+      - type: shell
+        command: echo "Running flow file...."

@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: my_name
+      changes:
+        - createTable:
+            tableName: test_table
+            columns:
+              - column:
+                  name: test_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: test_column
+                  type: INT
