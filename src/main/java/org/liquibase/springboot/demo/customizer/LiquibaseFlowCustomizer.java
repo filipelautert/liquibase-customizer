@@ -5,13 +5,13 @@ import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
 import liquibase.command.CommandScope;
+import liquibase.command.core.helpers.DbUrlConnectionCommandStep;
 import liquibase.integration.spring.Customizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class LiquibaseFlowCustomizer<T extends Liquibase> implements Customizer<T> {
 
     @Value("${liquibase.flowfile}")
@@ -22,7 +22,7 @@ public class LiquibaseFlowCustomizer<T extends Liquibase> implements Customizer<
 
     private static final Logger LOG = LoggerFactory.getLogger(LiquibaseFlowCustomizer.class);
 
-    @Override
+    //@Override
     public void customize(T liquibase) {
         System.setProperty("liquibaseProLicenseKey", licenseKey);
         try {
@@ -31,6 +31,7 @@ public class LiquibaseFlowCustomizer<T extends Liquibase> implements Customizer<
 
             new CommandScope(FlowCommandStep.COMMAND_NAME)
                 .addArgumentValue(FlowCommandStep.FLOW_FILE, flowFile)
+                .addArgumentValue(DbUrlConnectionCommandStep.DATABASE_ARG, liquibase.getDatabase())
                 .execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
