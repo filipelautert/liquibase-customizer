@@ -1,5 +1,6 @@
 stages:
   Default:
     actions:
-      - type: shell
-        command: echo "Running flow file...."
+      - type: liquibase
+        command: status
+        cmdArgs: {changelogfile: "${changelogFile}", username: "${username}", password: "${password}", url: "${url}"}
